@@ -14,7 +14,9 @@ RUN  apk add --no-cache --virtual .build-deps \
         && wget https://codeload.github.com/xiyangxixian/soar-web/zip/master -O /home/soar-web-master.zip \
         && cd /home/ && unzip soar-web-master.zip&& cd soar-web-master \
         && pip install -r requirement.txt && apk del .build-deps && rm -rf /home/soar-web-master.zip && rm -rf /tmp/*
-RUN chmod -R 755 /home/soar-web-master
+RUN chmod -R 755 /home/soar-web-master \
+rm -rf /home/soar-web-master/soar/soar.linux-amd64
+RUN wget https://github.com/XiaoMi/soar/releases/download/0.11.0/soar.linux-amd64 -O /home/soar-web-master/soar/soar.linux-amd64
 WORKDIR  /home/soar-web-master
 EXPOSE 5077
 CMD ["python","/home/soar-web-master/soar-web.py"]
